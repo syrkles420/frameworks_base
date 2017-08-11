@@ -31,6 +31,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import android.app.ActivityThread;
 
 /**
  * <p>The properties describing a
@@ -220,6 +221,12 @@ public final class CameraCharacteristics extends CameraMetadata<CameraCharacteri
      */
     @Nullable
     public <T> T get(Key<T> key) {
+        if(key == INFO_SUPPORTED_HARDWARE_LEVEL){
+            String packageName = ActivityThread.currentOpPackageName();
+            if(packageName.equals("com.oneplus.camera")){
+                return (T)new Integer(0x2);
+            }
+        }
         return mProperties.get(key);
     }
 
@@ -1388,7 +1395,6 @@ public final class CameraCharacteristics extends CameraMetadata<CameraCharacteri
      * normalization. Use {@link CameraCharacteristics#LENS_DISTORTION android.lens.distortion} instead.</p>
      *
      * @see CameraCharacteristics#LENS_DISTORTION
-
      */
     @Deprecated
     @PublicKey
@@ -1487,7 +1493,6 @@ public final class CameraCharacteristics extends CameraMetadata<CameraCharacteri
      * <p><b>Optional</b> - This value may be {@code null} on some devices.</p>
      * @deprecated
      * <p>Not used in HALv3 or newer; replaced by better partials mechanism</p>
-
      * @hide
      */
     @Deprecated
@@ -1881,7 +1886,6 @@ public final class CameraCharacteristics extends CameraMetadata<CameraCharacteri
      * <p><b>Optional</b> - This value may be {@code null} on some devices.</p>
      * @deprecated
      * <p>Not used in HALv3 or newer</p>
-
      * @hide
      */
     @Deprecated
@@ -1903,7 +1907,6 @@ public final class CameraCharacteristics extends CameraMetadata<CameraCharacteri
      * <p><b>Optional</b> - This value may be {@code null} on some devices.</p>
      * @deprecated
      * <p>Not used in HALv3 or newer</p>
-
      * @hide
      */
     @Deprecated
@@ -1921,7 +1924,6 @@ public final class CameraCharacteristics extends CameraMetadata<CameraCharacteri
      * @see CameraCharacteristics#SENSOR_INFO_ACTIVE_ARRAY_SIZE
      * @deprecated
      * <p>Not used in HALv3 or newer</p>
-
      * @hide
      */
     @Deprecated
@@ -1962,7 +1964,6 @@ public final class CameraCharacteristics extends CameraMetadata<CameraCharacteri
      * <p><b>Optional</b> - This value may be {@code null} on some devices.</p>
      * @deprecated
      * <p>Not used in HALv3 or newer</p>
-
      * @hide
      */
     @Deprecated
@@ -1986,7 +1987,6 @@ public final class CameraCharacteristics extends CameraMetadata<CameraCharacteri
      * <p><b>Optional</b> - This value may be {@code null} on some devices.</p>
      * @deprecated
      * <p>Not used in HALv3 or newer</p>
-
      * @hide
      */
     @Deprecated
